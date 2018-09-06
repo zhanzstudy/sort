@@ -15,17 +15,20 @@ void temp(SqList *l, int i, int j){
     l->data[j] = temp;
 }
 
+
 int Partition(SqList *l, int low, int high)
 {   
     int pivotkey;
+    //第一个记录作轴
     pivotkey = l->data[low];
-
+    //循环排序 交换位置
     while (low < high)
     {
+        //将比轴小的交换到左边
         while(low < high && l->data[high] >= pivotkey)
             high--;
         temp(l,low,high);
-
+        //将比轴大的交换到右边
         while (low < high && l->data[low] <= pivotkey)
             low++;
         temp(l,low, high);
@@ -33,14 +36,16 @@ int Partition(SqList *l, int low, int high)
     return low;
 }
 
+//递归快速排序
 void QSort(SqList *l, int low, int high)
 {
     int pivot;
     if (low < high)
     {
         pivot = Partition(l, low, high);
-
+        //对左边子表递归排序
         QSort(l, low, pivot - 1);
+        //对右边字表队规排序
         QSort(l, pivot + 1, high);
     }
 }
